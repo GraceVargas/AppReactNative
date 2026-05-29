@@ -1,11 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import { AuthContextType, User } from "../types/types";
 
 export const AuthContext = createContext<AuthContextType>(
-  {} as AuthContextType,
+  {} as AuthContextType
 );
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
     const setCurrentUser = (user: User | null) => setUser(user);
 

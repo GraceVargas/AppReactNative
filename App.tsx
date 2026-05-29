@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import { AuthProvider } from "./context/AuthContext";
 import RootNavigator from "./navigation/RootNavigator";
+import { ItemProvider } from "./context/ItemContext";
 
 const App: FC = () => {
   useEffect(() => {
@@ -12,9 +13,11 @@ const App: FC = () => {
 
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
+      <ItemProvider>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </ItemProvider>
     </AuthProvider>
   );
 };

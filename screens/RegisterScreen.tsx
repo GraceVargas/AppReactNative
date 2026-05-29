@@ -34,11 +34,16 @@ const RegisterScreen = ({ navigation }: Props) => {
     const success = await register(form.email, form.password);
 
     if (!success) {
-      alert("El usuario ya existe");
+      Alert.alert("Error", "El usuario ya existe");
       return;
     }
 
-    alert("Usuario creado");
+    Alert.alert("Registro exitoso", "Ya puedes iniciar sesión", [
+      {
+        text: "Ir a login",
+        onPress: () => navigation.navigate("Login"),
+      },
+    ]);
   };
     
 
@@ -75,7 +80,7 @@ const RegisterScreen = ({ navigation }: Props) => {
             onValueChange={(v) => setForm((f) => ({ ...f, acepta: v }))}
           />
         </View>
-        <Button title="Ingresar" onPress={handleRegister} />
+        <Button title="Confirmar" onPress={handleRegister} />
         <Text style={styles.title}>¿Ya tenes cuenta?</Text>
         <Button title="Iniciar sesión" onPress={() => navigation.navigate("Login")} />
       </View>
