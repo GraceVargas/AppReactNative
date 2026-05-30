@@ -1,7 +1,9 @@
-export const TABS = [
-  { key: 'libro',    label: '📚 Libros'    },
-  { key: 'pelicula', label: '🎬 Películas' },
-  { key: 'vistos',   label: '✅ Vistos'    },
+import { ItemType } from "./types/types";
+
+export const TYPES: { key: ItemType; label: string; emoji: string }[] = [
+  { key: 'libro',    label: 'Libro',    emoji: '📚' },
+  { key: 'pelicula', label: 'Película', emoji: '🎬' },
+  { key: 'serie',    label: 'Serie',    emoji: '📺' },
 ];
 
 export const STATUS_LABEL = {

@@ -8,6 +8,7 @@ import SearchScreen from "../screens/SearchScreen";
 import PersonScreen from "../screens/PersonScreen";
 import { RootTabParamList } from "../types/navigation";
 import AuthStack from "./AuthStack";
+import HomeScreen from "../screens/HomeScreen";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -56,7 +57,7 @@ export default function RootNavigator() {
         },
       })}
     >
-      <Tab.Screen name="Inicio" component={HomeStack} options={{ headerShown: false }} />
+      <Tab.Screen name="Inicio" component={HomeScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Buscar" component={SearchScreen} options={{ tabBarBadge: 5 }} />
       <Tab.Screen name="Perfil" component={PersonScreen} options={{ tabBarLabel: "Mi cuenta" }} />
     </Tab.Navigator>

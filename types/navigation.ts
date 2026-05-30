@@ -5,8 +5,9 @@ export type RootTabParamList = {
 }
 
 export type HomeStackParamList = {
-  Lista: undefined;
-  Detalle: { id: number };
+  Home: undefined;
+  ItemDetail: { itemId: string };
+  AddItem: undefined;
   Login: undefined;
   Register: undefined;
 };

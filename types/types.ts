@@ -11,14 +11,18 @@ export type Item = {
   id: string;
   title: string;
   author?: string;       
-  type: 'libro' | 'pelicula' | 'serie';
-  status: 'pendiente' | 'en curso' | 'terminado';
+  type: ItemType;
+  status: ItemStatus;
   photo?: string;        // URI de la foto sacada con la cámara
   rating: number | null; // 1 a 5, solo cuando status === 'terminado'
   review: string;
   createdAt: string;
   finishedAt: string | null;
 };
+
+export type ItemStatus = 'pendiente' | 'en curso' | 'terminado';
+
+export type ItemType = 'libro' | 'pelicula' | 'serie';
 
 export type ItemCardType = {
   item: Item;

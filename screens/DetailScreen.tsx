@@ -4,15 +4,15 @@ import { contactos } from '../db';
 import { RouteProp } from '@react-navigation/native';
 import { HomeStackParamList } from '../types/navigation';
 
-type RouteProps = RouteProp<HomeStackParamList, 'Detalle'>;
+type RouteProps = RouteProp<HomeStackParamList, 'ItemDetail'>;
 
 type Props = {
     route: RouteProps
     }
 
 const DetailScreen = ({ route }: Props) => {
-  const { id } = route.params;
-  const contacto = contactos.find(c => c.id === id);
+  const { itemId } = route.params;
+  const contacto = contactos.find(c => c.id === parseInt(itemId));
   return (
     <View style={styles.container}>
         <Text style={styles.title}>Detalle</Text>

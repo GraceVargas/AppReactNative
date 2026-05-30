@@ -1,24 +1,23 @@
-import React from 'react';
-import {
-  View, Text, StyleSheet, FlatList,
-  TouchableOpacity, Alert,
-  SafeAreaView,
-} from 'react-native';
+import React, {FC} from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ItemType } from '../types/types';
+import { TYPES } from '../constants';
 
-export const EmptyState = ({ tab, navigation }) => {
-  const config = {
-    libro:    { emoji: '📚', text: 'No tenés libros pendientes',    sub: 'Agregá un libro para empezar' },
-    pelicula: { emoji: '🎬', text: 'No tenés películas pendientes', sub: 'Agregá una película para empezar' },
-    vistos:   { emoji: '🏆', text: 'Todavía no terminaste nada',    sub: 'Marcá algo como terminado para verlo acá' },
-  };
-  const { emoji, text, sub } = config[tab];
+type Props = {
+  tab: ItemType;
+  navigation: any;
+};
+
+export const EmptyState: FC<Props> = ({ tab, navigation }) => {
+
+  const { emoji, key, label } = TYPES.find((t) => t.key === tab) || TYPES[0];
 
   return (
     <View style={styles.empty}>
       <Text style={styles.emptyEmoji}>{emoji}</Text>
-      <Text style={styles.emptyText}>{text}</Text>
-      <Text style={styles.emptySub}>{sub}</Text>
-      {tab !== 'vistos' && (
+      <Text style={styles.emptyText}>No tenés {label.toLowerCase()}s pendientes</Text>
+      <Text style={styles.emptySub}>Agregá un {label.toLowerCase()} para empezar</Text>
+      {tab !== 'serie' && (
         <TouchableOpacity
           style={styles.emptyBtn}
           onPress={() => navigation.navigate('AddItem')}
