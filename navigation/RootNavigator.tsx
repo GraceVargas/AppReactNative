@@ -3,12 +3,12 @@ import { View, ActivityIndicator } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from "../hooks/useAuth";
-import HomeStack from "./HomeStack";
 import SearchScreen from "../screens/SearchScreen";
 import PersonScreen from "../screens/PersonScreen";
 import { RootTabParamList } from "../types/navigation";
 import AuthStack from "./AuthStack";
 import HomeScreen from "../screens/HomeScreen";
+import HomeStack from "./HomeStack";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -57,7 +57,7 @@ export default function RootNavigator() {
         },
       })}
     >
-      <Tab.Screen name="Inicio" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Inicio" component={HomeStack} options={{ headerShown: false }} />
       <Tab.Screen name="Buscar" component={SearchScreen} options={{ tabBarBadge: 5 }} />
       <Tab.Screen name="Perfil" component={PersonScreen} options={{ tabBarLabel: "Mi cuenta" }} />
     </Tab.Navigator>

@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ListaScreen from '../screens/ListScreen';
-import DetalleScreen from '../screens/DetailScreen';
+import DetailScreen from '../screens/DetailScreen';
 import { HomeStackParamList } from '../types/navigation';
+import AddItemScreen from '../screens/AddItemScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
-const HomeStack: React.FC = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="Lista" component={ListaScreen} />
-    <Stack.Screen name="Detalle" component={DetalleScreen} />
+const HomeStack: FC = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="ItemDetail" component={DetailScreen} />
+    <Stack.Screen name="AddItem" component={AddItemScreen} />
   </Stack.Navigator>
 );
 

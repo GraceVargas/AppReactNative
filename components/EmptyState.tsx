@@ -10,21 +10,19 @@ type Props = {
 
 export const EmptyState: FC<Props> = ({ tab, navigation }) => {
 
-  const { emoji, key, label } = TYPES.find((t) => t.key === tab) || TYPES[0];
+  const { emoji, label } = TYPES.find((t) => t.key === tab) || TYPES[0];
 
   return (
     <View style={styles.empty}>
       <Text style={styles.emptyEmoji}>{emoji}</Text>
       <Text style={styles.emptyText}>No tenés {label.toLowerCase()}s pendientes</Text>
       <Text style={styles.emptySub}>Agregá un {label.toLowerCase()} para empezar</Text>
-      {tab !== 'serie' && (
         <TouchableOpacity
           style={styles.emptyBtn}
           onPress={() => navigation.navigate('AddItem')}
         >
           <Text style={styles.emptyBtnText}>+ Agregar ahora</Text>
         </TouchableOpacity>
-      )}
     </View>
   );
 };

@@ -8,8 +8,6 @@ export type HomeStackParamList = {
   Home: undefined;
   ItemDetail: { itemId: string };
   AddItem: undefined;
-  Login: undefined;
-  Register: undefined;
 };
 
 export type AuthStackParamList = {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import { Item, ItemType } from "../types/types";
 import { HomeStackParamList } from "../types/navigation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import ItemsList from "../components/ItemsList";
+import ScreenContainer from "../components/ScreenContainer";
 
 type NavProps = NativeStackNavigationProp<HomeStackParamList, "Home">;
 
@@ -23,10 +24,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState<ItemType>("libro");
   const { getByType, getFinished, deleteItem } = useItem();
 
-  const data =
-    activeTab === "libro"
-      ? getFinished()
-      : getByType(activeTab).filter((i) => i.status !== "terminado");
+  const data = getByType(activeTab);     
 
   const handleDelete = (item: Item) => {
     Alert.alert("Eliminar", `¿Eliminar "${item.title}"?`, [
@@ -40,7 +38,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Mi lista</Text>
         {/* <TouchableOpacity
@@ -73,8 +71,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       </View>
 
       <ItemsList data={data} navigation={navigation} handleDelete={handleDelete} activeTab={activeTab} />
-    
-    </View>
+    </ScreenContainer>
   );
 };
 
@@ -84,7 +81,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F7F5",
-    marginTop: '20%',
   },
 
   // Header
