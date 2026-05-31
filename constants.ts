@@ -1,5 +1,8 @@
 import { ItemType } from "./types/types";
 
+export const USERS_KEY = "users";
+export const LOGGED_USER_KEY = "loggedUser";
+
 export const TYPES: { key: ItemType; label: string; emoji: string }[] = [
   { key: 'libro',    label: 'Libro',    emoji: '📚' },
   { key: 'pelicula', label: 'Película', emoji: '🎬' },
