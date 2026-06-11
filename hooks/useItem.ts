@@ -2,10 +2,12 @@ import { useContext, useEffect } from 'react';
 import { Item } from '../types/types';
 import { ItemContext } from '../context/ItemContext';
 import itemsStorage from '../storage/itemsStorage';
+import { useAuth } from './useAuth';
 
-const useItem = (userId: string) => {
+const useItem = () => {
   const { items, setItems } = useContext(ItemContext);
-  const { loadItems, saveItems } = itemsStorage(userId);
+  const { user } = useAuth();
+  const { loadItems, saveItems } = itemsStorage(user?.id ?? '');
 
     useEffect(() => {
     const load = async () => {
@@ -13,7 +15,7 @@ const useItem = (userId: string) => {
       setItems(stored);
     };
     load();
-  }, [userId]);
+  }, [user?.id]);
 
   const updateAndSave = (updatedItems: Item[]) => {
     setItems(updatedItems);

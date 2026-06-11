@@ -41,13 +41,13 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     <ScreenContainer>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Mi lista</Text>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={styles.addBtn}
-          // onPress={() => navigation.navigate('AddItem')}
+          onPress={() => navigation.navigate('AddItem')}
           activeOpacity={0.8}
         >
           <Text style={styles.addBtnText}>+ Agregar</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
 
       <View style={styles.tabBar}>

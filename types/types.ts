@@ -3,6 +3,7 @@ export type RegisterForm = { email: string; password: string; acepta: boolean };
 export type LoginForm = Omit<RegisterForm, "acepta">;
 
 export type User = {
+  id: string;
   email: string;
   password: string;
 };

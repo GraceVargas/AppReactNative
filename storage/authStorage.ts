@@ -1,8 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../types/types";
-
-const USERS_KEY = "users";
-const LOGGED_USER_KEY = "loggedUser";
+import { LOGGED_USER_KEY, USERS_KEY } from "../constants";
 
 export const getUsers = async (): Promise<User[]> => {
   const data = await AsyncStorage.getItem(USERS_KEY);

@@ -41,6 +41,7 @@ const useAuth = () => {
       }
 
       const newUser = {
+        id: Date.now().toString() + Math.random().toString(36).slice(2), 
         email,
         password,
       };
