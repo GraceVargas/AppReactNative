@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import {
   View,
   Text,
@@ -43,7 +43,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
         <Text style={styles.headerTitle}>Mi lista</Text>
         <TouchableOpacity
           style={styles.addBtn}
-          onPress={() => navigation.navigate('AddItem')}
+          onPress={() => navigation.navigate('AddItem', { itemType: null })}
           activeOpacity={0.8}
         >
           <Text style={styles.addBtnText}>+ Agregar</Text>

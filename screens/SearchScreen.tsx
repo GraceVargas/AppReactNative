@@ -1,29 +1,170 @@
-import React from 'react'
-import { View, StyleSheet, Text } from "react-native"
+import React from 'react';
+import {
+  View, Text, TextInput, FlatList, TouchableOpacity,
+  StyleSheet, ActivityIndicator,
+} from 'react-native';
+import useItem from '../hooks/useItem';
+import ScreenContainer from '../components/ScreenContainer';
+import { useSearch } from '../hooks/useSearch';
+import { FoundBook } from '../components/FoundBook';
 
-function SearchScreen() {
+export default function SearchScreen() {
+  const { items } = useItem();
+  const { query, setQuery, results, loading, searched, handleAdd , handleSearch} = useSearch();
+  // IDs de libros ya agregados a la lista
+  const addedKeys = new Set(items.map(i => i.externalKey).filter(Boolean));
+
+  const onSubmitSearch = () => {
+    handleSearch();
+  };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Search</Text>
-      <Text>Pantalla de búsqueda</Text>
-    </View>
-  )
+    <ScreenContainer>
+      <View style={styles.container}>
+
+        <Text style={styles.screenTitle}>Buscar libros</Text>
+
+        <View style={styles.searchRow}>
+          <TextInput
+            style={styles.input}
+            placeholder="Título o autor..."
+            placeholderTextColor="#BBB"
+            value={query}
+            onChangeText={setQuery}
+            onSubmitEditing={onSubmitSearch}
+            returnKeyType="search"
+            autoCapitalize="none"
+          />
+          <TouchableOpacity
+            style={[styles.searchBtn, !query.trim() && styles.searchBtnDisabled]}
+            onPress={handleSearch}
+            disabled={!query.trim() || loading}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.searchBtnText}>Buscar</Text>
+          </TouchableOpacity>
+        </View>
+
+        {loading ? (
+          <View style={styles.centered}>
+            <ActivityIndicator size="large" color="#1A1A1A" />
+            <Text style={styles.loadingText}>Buscando...</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={results}
+            keyExtractor={item => item.key}
+            renderItem={({ item }) => {
+              const alreadyAdded = addedKeys.has(item.key);
+              return <FoundBook item={item} handleAdd={handleAdd} added={alreadyAdded} />;
+            }}
+            contentContainerStyle={styles.list}
+            keyboardShouldPersistTaps="handled"
+            ListEmptyComponent={
+              searched ? (
+                <View style={styles.centered}>
+                  <Text style={styles.emptyEmoji}>🔍</Text>
+                  <Text style={styles.emptyText}>Sin resultados para "{query}"</Text>
+                  <Text style={styles.emptySub}>Probá con otro título o autor</Text>
+                </View>
+              ) : (
+                <View style={styles.centered}>
+                  <Text style={styles.emptyEmoji}>📚</Text>
+                  <Text style={styles.emptyText}>Buscá un libro</Text>
+                  <Text style={styles.emptySub}>Escribí un título o autor arriba</Text>
+                </View>
+              )
+            }
+          />
+        )}
+      </View>
+    </ScreenContainer>
+  );
 }
 
+
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: '#F7F7F5',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#a3f3e7',
-    color: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+
+  screenTitle: {
+    fontSize: 26,
+    fontWeight: '800',
+    color: '#1A1A1A',
+    letterSpacing: -0.5,
+    marginBottom: 16,
+  },
+
+  // Search
+  searchRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 16,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    fontSize: 15,
+    color: '#1A1A1A',
+    shadowColor: '#000',
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 1,
+  },
+  searchBtn: {
+    backgroundColor: '#1A1A1A',
+    borderRadius: 12,
+    paddingHorizontal: 18,
+    justifyContent: 'center',
+  },
+  searchBtnDisabled: {
+    backgroundColor: '#CDCDCD',
+  },
+  searchBtnText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 14,
+  },
+
+  // Lista
+  list: {
+    paddingBottom: 24,
+  },
+
+  // Estados vacíos / loading
+  centered: {
+    alignItems: 'center',
+    paddingTop: 60,
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 14,
+    color: '#AAA',
+  },
+  emptyEmoji: {
+    fontSize: 48,
+    marginBottom: 12,
+  },
+  emptyText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#1A1A1A',
+    textAlign: 'center',
+  },
+  emptySub: {
+    fontSize: 13,
+    color: '#AAA',
+    marginTop: 4,
+    textAlign: 'center',
   },
 });
-
-export default SearchScreen

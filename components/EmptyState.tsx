@@ -19,7 +19,7 @@ export const EmptyState: FC<Props> = ({ tab, navigation }) => {
       <Text style={styles.emptySub}>Agregá un {label.toLowerCase()} para empezar</Text>
         <TouchableOpacity
           style={styles.emptyBtn}
-          onPress={() => navigation.navigate('AddItem')}
+          onPress={() => navigation.navigate('AddItem', { itemType: tab })}
         >
           <Text style={styles.emptyBtnText}>+ Agregar ahora</Text>
         </TouchableOpacity>

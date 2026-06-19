@@ -14,23 +14,28 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import useItem from "../hooks/useItem";
 import { ItemType } from "../types/types";
 import { TYPES } from "../constants";
+import { RouteProp } from '@react-navigation/native';
 import { HomeStackParamList } from "../types/navigation";
 import ScreenContainer from "../components/ScreenContainer";
 import useImagePicker from "../hooks/useImagePicker";
 
 type NavProps = NativeStackNavigationProp<HomeStackParamList, "AddItem">;
+type RouteProps = RouteProp<HomeStackParamList, "AddItem">;
 
 type Props = {
   navigation: NavProps;
+  route: RouteProps;
 };
 
-export default function AddItemScreen({ navigation }: Props) {
+export default function AddItemScreen({ navigation, route }: Props) {
   const { addItem } = useItem();
   const { handlePhotoPress, photo, setPhoto } = useImagePicker();
+  const isTypePreselected = !!route.params?.itemType;
+  
   const [formInfo, setFormInfo] = useState({
     title: "",
     author: "",
-    type: null as ItemType | null,
+    type: route.params?.itemType ?? (null as ItemType | null),
     });
 
   const [loading, setLoading] = useState(false);
@@ -121,8 +126,9 @@ export default function AddItemScreen({ navigation }: Props) {
                     styles.typeBtn,
                     formInfo.type === t.key && styles.typeBtnActive,
                   ]}
-                  onPress={() => setFormInfo({ ...formInfo, type: t.key })}
-                  activeOpacity={0.75}
+                  onPress={() => !isTypePreselected && setFormInfo({ ...formInfo, type: t.key })}
+                  disabled={isTypePreselected}
+                  activeOpacity={isTypePreselected ? 1 : 0.75}
                 >
                   <Text style={styles.typeEmoji}>{t.emoji}</Text>
                   <Text
@@ -180,7 +186,6 @@ export default function AddItemScreen({ navigation }: Props) {
   );
 }
 
-// ─── Estilos ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
   safe: {

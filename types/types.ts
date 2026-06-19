@@ -19,6 +19,7 @@ export type Item = {
   review: string;
   createdAt: string;
   finishedAt: string | null;
+  externalKey?: string; // key de Open Library, para detectar duplicados
 };
 
 export type ItemStatus = 'pendiente' | 'en curso' | 'terminado';
@@ -46,6 +47,13 @@ export type ItemContextType = {
   getPending: () => Item[]; 
 };
 
+export type BookResult = {
+  key: string;
+  title: string;
+  author_name?: string[];
+  first_publish_year?: number;
+  cover_i?: number;       
+};
 
  
 
