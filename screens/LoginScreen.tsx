@@ -9,6 +9,7 @@ import { LoginForm } from '../types/types';
 import { AuthStackParamList } from '../types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ScreenContainer from '../components/ScreenContainer';
+import utils from '../utils';
 
 const initialState: LoginForm = { email: '', password: '' };
 
@@ -22,11 +23,8 @@ const LoginScreen = ({ navigation }: Props) => {
   const [form, setForm] = useState<LoginForm>(initialState);
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const { isValidEmail } = utils;
 
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
   const set = (key: keyof LoginForm) => (value: string) =>
     setForm(f => ({ ...f, [key]: value }));

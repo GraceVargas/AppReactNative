@@ -9,6 +9,7 @@ import { RegisterForm } from '../types/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthStackParamList } from '../types/navigation';
 import ScreenContainer from '../components/ScreenContainer';
+import utils from '../utils';
 
 const initialState: RegisterForm = { email: '', password: '', acepta: false };
 
@@ -20,13 +21,10 @@ type Props = {
 
 const RegisterScreen = ({ navigation }: Props) => {
   const { register } = useAuth();
+  const { isValidEmail } = utils;
   const [form, setForm] = useState<RegisterForm>(initialState);
   const [loading, setLoading] = useState(false);
 
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
   const set = (key: keyof RegisterForm) => (value: string | boolean) =>
     setForm(f => ({ ...f, [key]: value }));
