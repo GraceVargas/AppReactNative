@@ -38,13 +38,8 @@ export type AuthContextType = {
 };
 
 export type ItemContextType = {
-  items: Item[]; 
-  setItem: (item: Item) => void; 
-  updateItem: (id: string, changes: Partial<Item>) => void; 
-  deleteItem: (id: string) => void;
-  getByType: (type: string) => Item[]; 
-  getFinished: () => Item[]; 
-  getPending: () => Item[]; 
+  items: Item[];
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
 };
 
 export type BookResult = {

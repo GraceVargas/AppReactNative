@@ -43,7 +43,9 @@ export default function AddItemScreen({ navigation, route }: Props) {
   const handleSave = () => {
     const selectedType = formInfo.type;
 
-    if (!formInfo.title.trim()) {
+    const titleTrimmed = formInfo.title.trim();
+
+    if (!titleTrimmed) {
       Alert.alert("Campo requerido", "El título no puede estar vacío.");
       return;
     }
@@ -55,7 +57,7 @@ export default function AddItemScreen({ navigation, route }: Props) {
     setLoading(true);
     setTimeout(() => {
       addItem({
-        title: formInfo.title.trim(),
+        title: titleTrimmed,
         author: formInfo.author.trim() || undefined,
         type: selectedType,
         photo: photo ?? undefined,

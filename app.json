@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tp_5",
-    "slug": "tp_5",
+    "name": "watchlist",
+    "slug": "watchlists",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

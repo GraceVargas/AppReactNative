@@ -1,10 +1,7 @@
 import React, { createContext, useState } from 'react';
-import { Item } from '../types/types';
+import { Item, ItemContextType } from '../types/types';
 
-type ItemContextType = {
-  items: Item[];
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
-};
+
 
 export const ItemContext = createContext<ItemContextType>({
   items: [],

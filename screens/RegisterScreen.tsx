@@ -23,11 +23,16 @@ const RegisterScreen = ({ navigation }: Props) => {
   const [form, setForm] = useState<RegisterForm>(initialState);
   const [loading, setLoading] = useState(false);
 
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const set = (key: keyof RegisterForm) => (value: string | boolean) =>
     setForm(f => ({ ...f, [key]: value }));
 
   const handleRegister = async () => {
-    if (!form.email.includes('@') || form.password.length < 4 || !form.acepta) {
+    if (!isValidEmail(form.email) || form.password.length < 4 || !form.acepta) {
       Alert.alert('Revisá los datos', 'Email válido, contraseña de al menos 4 caracteres y aceptar términos.');
       return;
     }

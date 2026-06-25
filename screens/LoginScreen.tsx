@@ -23,12 +23,20 @@ const LoginScreen = ({ navigation }: Props) => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
 
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const set = (key: keyof LoginForm) => (value: string) =>
     setForm(f => ({ ...f, [key]: value }));
 
   const handleLogin = async () => {
-    if (!form.email.includes('@') || form.password.length < 4) {
-      Alert.alert('Revisá los datos', 'Email válido y contraseña de al menos 4 caracteres.');
+    if (!isValidEmail(form.email) || form.password.length < 4) {
+      Alert.alert(
+        'Revisá los datos', 
+        'Ingresá un email válido y una contraseña de al menos 4 caracteres.'
+      );
       return;
     }
 
