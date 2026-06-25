@@ -20,6 +20,7 @@ const ItemsList: FC<Props> = ({ data, navigation, handleDelete, activeTab }) => 
             contentContainerStyle={styles.list}
             renderItem={({ item }) => (
               <ItemCard
+                variant="item"
                 item={item}
                 onPress={() =>
                   navigation.navigate("ItemDetail", { itemId: item.id })

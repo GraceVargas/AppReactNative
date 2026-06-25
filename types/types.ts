@@ -26,11 +26,21 @@ export type ItemStatus = 'pendiente' | 'en curso' | 'terminado';
 
 export type ItemType = 'libro' | 'pelicula' | 'serie';
 
-export type ItemCardType = {
+type ItemCardType = {
+  variant: 'item';
   item: Item;
   onPress: () => void;
   onDelete: () => void;
 };
+
+type BookCardType = {
+  variant: 'book';
+  item: BookResult;
+  added: boolean;
+  onAdd: () => void;
+};
+
+export type CardProps = ItemCardType | BookCardType;
 
 export type AuthContextType = {
   user: User | null;

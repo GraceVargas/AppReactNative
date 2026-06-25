@@ -6,7 +6,7 @@ import {
 import useItem from '../hooks/useItem';
 import ScreenContainer from '../components/ScreenContainer';
 import { useSearch } from '../hooks/useSearch';
-import { FoundBook } from '../components/FoundBook';
+import { ItemCard } from '../components/ItemCard';
 
 export default function SearchScreen() {
   const { items } = useItem();
@@ -55,7 +55,14 @@ export default function SearchScreen() {
             keyExtractor={item => item.key}
             renderItem={({ item }) => {
               const alreadyAdded = addedKeys.has(item.key);
-              return <FoundBook item={item} handleAdd={handleAdd} added={alreadyAdded} />;
+              return (
+                <ItemCard
+                  variant="book"
+                  item={item}
+                  added={alreadyAdded}
+                  onAdd={() => handleAdd(item, alreadyAdded)}
+                />
+              );
             }}
             contentContainerStyle={styles.list}
             keyboardShouldPersistTaps="handled"
