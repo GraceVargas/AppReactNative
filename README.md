@@ -88,7 +88,6 @@ app_react_native/
 ├── components/                  # Componentes reutilizables
 │   ├── ItemCard.tsx             # Tarjeta de item en lista
 │   ├── ItemsList.tsx            # Lista de items (FlatList)
-│   ├── FoundBook.tsx            # Tarjeta de libro encontrado
 │   ├── EmptyState.tsx           # Estado vacío con CTA
 │   └── ScreenContainer.tsx      # Wrapper con SafeArea
 │
@@ -118,6 +117,8 @@ app_react_native/
 │   ├── types.ts                 # Tipos principales
 │   └── navigation.ts            # Tipos de navegación
 │
+├── utils/                       # Funciones auxiliares
+│   └── index.ts                 # Validación de correo
 ├── constants.ts                 # Constantes (colores, textos, etc.)
 ├── declarations.d.ts            # Declaraciones de tipos para librerías
 └── README.md                    # Este archivo
